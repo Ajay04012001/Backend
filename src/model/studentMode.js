@@ -11,6 +11,11 @@ email:
         type: String,
         require:true,
         unique: true,
+},
+image:{
+        type: String,
+        data:Buffer,
+        require: false
 }
 });
 module.exports=mongoose.model('students',studentModel);

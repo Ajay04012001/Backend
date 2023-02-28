@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const model = require('../model/studentMode');
-router.post('/',async(req,res) => {
+const {upload} = require('../middleware/uploads');
+
+router.post('/', upload.single('image'), async(req,res) => {
     try{
         const { name,email }= req.body;
         if(!name || name ==""){
@@ -17,7 +19,9 @@ router.post('/',async(req,res) => {
 const addData = new model({
     name: name,
     email:email,
+    image: req.file.path
 });
+console.log(req.file);
  const data = await addData.save();
  res.send(data);
 
@@ -25,4 +29,4 @@ const addData = new model({
         res.send(error)
     }
 });
-module.exports = router;
+module.exports = router; 

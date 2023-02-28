@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const model = require('../model/studentMode');
 
-router.delete('/',async(req,res) => {
+router.delete('/:_id',async(req,res) => {
     try {
         const id =req.params.id;
 
 
-        await model.deleteMany();
+        await model.deleteOne(id);
         res.status(200).send("delete aand!");
 
     } catch (error) {
